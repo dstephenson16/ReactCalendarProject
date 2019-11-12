@@ -11,7 +11,7 @@ export default class DayBlock extends Component {
 
     render() {
         return (
-            <div className="day-block">
+            <div className={`day-block${this.props.filler ? " filler" : ""}`}>
                 <div className="date">{this.props.date}</div>
                 <textarea className="calendar-input" />
             </div>

@@ -3,19 +3,41 @@ import React, { Component } from 'react';
 import Weekday from "./weekday";
 import DayBlock from "./dayBlock";
 
+import monthData from "../../static/assets/dummyData.json"
+
 export default class App extends Component {
   constructor(props) {
     super(props)
 
     this.days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    this.month = "November"
 
-    this.state = {
-      month: "November",
-      year: "2019", 
-      daysInMonth: 30,
-      daysInPreviousMonth: 31,
-      startDay: "Friday"
+    this.state = monthData[this.month]
+
+    this.handleMonthChange = this.handleMonthChange.bind(this)
+  }
+
+  handleMonthChange(direction) {
+    let currentMonthIndex = this.months.indexOf(this.month)
+
+    if (direction === "+") {
+      currentMonthIndex++
+    } else {
+      currentMonthIndex--
     }
+
+    if (currentMonthIndex === 12) {
+      currentMonthIndex = 0
+    }
+
+    if (currentMonthIndex === -1) {
+      currentMonthIndex = 11
+    }
+
+    this.month = this.months[currentMonthIndex]
+
+    this.setState(monthData[this.month])
   }
 
   renderDays = () => {
@@ -28,7 +50,7 @@ export default class App extends Component {
     let fillerDate = (this.state.daysInPreviousMonth - this.days.indexOf(this.state.startDay)) + 1
 
     while (fillerDate <= this.state.daysInPreviousMonth) {
-      blocks.push(<DayBlock date={fillerDate} />)
+      blocks.push(<DayBlock date={fillerDate} filler={true} />)
       fillerDate++
     }
 
@@ -44,9 +66,9 @@ export default class App extends Component {
       <div className='app'>
         <div className="content-wrapper">
           <div className="header">
-            <button>Previous Month</button>
+            <button onClick={() => this.handleMonthChange("-")}>Previous Month</button>
             <h1>{this.state.month}</h1>
-            <button>Next Month</button>
+            <button onClick={() => this.handleMonthChange("+")}>Next Month</button>
           </div>
 
           <div className="calendar-wrapper">

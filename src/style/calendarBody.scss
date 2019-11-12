@@ -1,19 +1,32 @@
 .calendar-wrapper {
     border: 3px solid navy;
-    width: 1056px;
+    width: calc(70vw + 6px);
 
     .days-wrapper, .blocks-wrapper {
         display: grid;
-        grid-template-columns: repeat(7, 150px);
+        grid-template-columns: repeat(7, 10vw);
         justify-items: center;
     }
 
     .day-block {
-        height: 175px;
+        height: 12vw;
 
         textarea {
-            height: 150px;
+            height: 10vw;
             width: 100%;
         }
+    }
+
+    .filler {
+        color: rgb(163, 163, 163);
+    }
+
+    .date {
+        font-size: 1.4vw;
+        padding-left: .2vw;
+    }
+
+    h3 {
+        font-size: 2vw;
     }
 }
