@@ -4,9 +4,39 @@ import Weekday from "./weekday";
 import DayBlock from "./dayBlock";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+    this.state = {
+      month: "November",
+      year: "2019", 
+      daysInMonth: 30,
+      daysInPreviousMonth: 31,
+      startDay: "Friday"
+    }
+  }
+
   renderDays = () => {
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    return days.map(day => <Weekday day={day} />)
+    return this.days.map(day => <Weekday day={day} />)
+  }
+
+  renderBlocks = () => {
+    const blocks = []
+
+    let fillerDate = (this.state.daysInPreviousMonth - this.days.indexOf(this.state.startDay)) + 1
+
+    while (fillerDate <= this.state.daysInPreviousMonth) {
+      blocks.push(<DayBlock date={fillerDate} />)
+      fillerDate++
+    }
+
+    for (let i=1; i <= this.state.daysInMonth; i++) {
+      blocks.push(<DayBlock date={i} />)
+    }
+
+    return blocks
   }
 
   render() {
@@ -14,7 +44,7 @@ export default class App extends Component {
       <div className='app'>
         <div className="header">
           <button>Previous Month</button>
-          <h1>November</h1>
+          <h1>{this.state.month}</h1>
           <button>Next Month</button>
         </div>
 
@@ -24,13 +54,13 @@ export default class App extends Component {
           </div>
 
           <div className="blocks-wrapper">
-            <DayBlock date="27" />
+            {this.renderBlocks()}
           </div>
 
         </div>
 
         <div className="footer">
-          <h1>2019</h1>
+          <h1>{this.state.year}</h1>
         </div>
       </div>
     );
