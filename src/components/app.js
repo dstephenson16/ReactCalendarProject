@@ -42,25 +42,27 @@ export default class App extends Component {
   render() {
     return (
       <div className='app'>
-        <div className="header">
-          <button>Previous Month</button>
-          <h1>{this.state.month}</h1>
-          <button>Next Month</button>
-        </div>
-
-        <div className="calendar-wrapper">
-          <div className="days-wrapper">
-            {this.renderDays()}
+        <div className="content-wrapper">
+          <div className="header">
+            <button>Previous Month</button>
+            <h1>{this.state.month}</h1>
+            <button>Next Month</button>
           </div>
 
-          <div className="blocks-wrapper">
-            {this.renderBlocks()}
+          <div className="calendar-wrapper">
+            <div className="days-wrapper">
+              {this.renderDays()}
+            </div>
+
+            <div className="blocks-wrapper">
+              {this.renderBlocks()}
+            </div>
+
           </div>
 
-        </div>
-
-        <div className="footer">
-          <h1>{this.state.year}</h1>
+          <div className="footer">
+            <h1>{this.state.year}</h1>
+          </div>
         </div>
       </div>
     );

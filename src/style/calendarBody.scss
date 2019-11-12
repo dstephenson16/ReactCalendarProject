@@ -1,0 +1,19 @@
+.calendar-wrapper {
+    border: 3px solid navy;
+    width: 1056px;
+
+    .days-wrapper, .blocks-wrapper {
+        display: grid;
+        grid-template-columns: repeat(7, 150px);
+        justify-items: center;
+    }
+
+    .day-block {
+        height: 175px;
+
+        textarea {
+            height: 150px;
+            width: 100%;
+        }
+    }
+}
